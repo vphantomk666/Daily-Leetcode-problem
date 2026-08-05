@@ -1,15 +1,19 @@
-from collections import defaultdict
+from collections import defaultdict, deque
 
 class Solution:
     def dfs(self, node, invoke, vis):
+        queue = deque()
         vis[node] = 1
-        for nxt in invoke[node]:
-            if not vis[nxt]:
-                self.dfs(nxt, invoke, vis)
+        queue.append(node)
+        while queue:
+            v = queue.popleft()
+            for nxt in invoke[v]:
+                if not vis[nxt]:
+                    vis[nxt] = 1
+                    queue.append(nxt)
 
     def remainingMethods(self, n: int, k: int, invocations: List[List[int]]) -> List[int]:
         invoke = defaultdict(list)
-
         for u, v in invocations:
             invoke[u].append(v)
 
