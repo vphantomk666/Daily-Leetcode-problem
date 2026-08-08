@@ -4,6 +4,8 @@ class Solution:
     def validSequence(self, word1: str, word2: str) -> List[int]:
         n = len(word1)
         m = len(word2)
+        if n < m:
+            return []
 
         last = [-1] * m
 
